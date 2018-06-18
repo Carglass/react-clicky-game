@@ -13,6 +13,22 @@ class App extends Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.shuffle = this.shuffle.bind(this);
+  }
+
+  shuffle(array) {
+    var shuffledArray = array.slice();
+    var tmp,
+      current,
+      top = shuffledArray.length;
+    if (top)
+      while (--top) {
+        current = Math.floor(Math.random() * (top + 1));
+        tmp = shuffledArray[current];
+        shuffledArray[current] = shuffledArray[top];
+        shuffledArray[top] = tmp;
+      }
+    return shuffledArray;
   }
 
   handleClick(clickedValue) {
@@ -27,18 +43,20 @@ class App extends Component {
       }
       // the current score is reset to 0
       // clickedImages is reset to []
-      this.setState({ score: 0, clickedImages: [] });
       // TODO: currentlayout is modified randomly
+      let newLayout = this.shuffle(this.state.currentLayout);
+      this.setState({ score: 0, clickedImages: [], currentLayout: newLayout });
     } else {
       // if no, the game goes on
       // the score is incremented by one
       // the clicked image is added to the clickedImages array
+      // the currentLayout Array is randomly reorganized
+      let newLayout = this.shuffle(this.state.currentLayout);
       this.setState({
         score: this.state.score + 1,
-        clickedImages: this.state.clickedImages.concat(clickedValue)
+        clickedImages: this.state.clickedImages.concat(clickedValue),
+        currentLayout: newLayout
       });
-
-      // the currentLayout Array is randomly reorganized
     }
   }
 
