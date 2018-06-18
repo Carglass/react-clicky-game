@@ -1,3 +1,22 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+}
+
+.game-zone {
+  display: flex;
+  width: 60%;
+  margin: auto;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.click-block {
+  width: 30%;
+  background-color: aqua;
 }

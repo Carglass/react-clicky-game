@@ -53,14 +53,18 @@ class App extends Component {
               High Score: {this.state.highscore}
             </div>
           </div>
-          <div className="game-zone">
-            {this.state.currentLayout.map(value => (
-              <div key={value} onClick={() => this.handleClick(value)}>
-                {value}
-              </div>
-            ))}
-          </div>
         </header>
+        <div className="game-zone">
+          {this.state.currentLayout.map(value => (
+            <div
+              className="click-block"
+              key={value}
+              onClick={() => this.handleClick(value)}
+            >
+              {value}
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
