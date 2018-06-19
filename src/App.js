@@ -1,6 +1,21 @@
 import React, { Component } from "react";
 import "./App.css";
 
+const links = [
+  "/images/debruyne.jpg",
+  "/images/iniesta.jpg",
+  "/images/kane.jpg",
+  "/images/messi.jpg",
+  "/images/muller.jpg",
+  "/images/neymar.jpg",
+  "/images/ochoa.jpg",
+  "/images/pogba.jpg",
+  "/images/ronaldo.jpg",
+  "/images/salah.jpg",
+  "/images/son.jpg",
+  "/images/suarez.jpg"
+];
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -64,7 +79,7 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <div className="page-title">Clicky Game</div>
+          <div className="page-title">World Cup Clicky Game</div>
           <div className="scores">
             <div className="current-score">Score: {this.state.score}</div>
             <div className="current-score">
@@ -79,7 +94,11 @@ class App extends Component {
               key={value}
               onClick={() => this.handleClick(value)}
             >
-              {value}
+              <img
+                className="player-img"
+                src={links[value - 1]}
+                alt={links[value - 1]}
+              />
             </div>
           ))}
         </div>
