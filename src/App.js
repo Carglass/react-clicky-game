@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import "./App.css";
 
 const links = [
-  "/images/debruyne.jpg",
-  "/images/iniesta.jpg",
-  "/images/kane.jpg",
-  "/images/messi.jpg",
-  "/images/muller.jpg",
-  "/images/neymar.jpg",
-  "/images/ochoa.jpg",
-  "/images/pogba.jpg",
-  "/images/ronaldo.jpg",
-  "/images/salah.jpg",
-  "/images/son.jpg",
-  "/images/suarez.jpg"
+  "images/debruyne.jpg",
+  "images/iniesta.jpg",
+  "images/kane.jpg",
+  "images/messi.jpg",
+  "images/muller.jpg",
+  "images/neymar.jpg",
+  "images/ochoa.jpg",
+  "images/pogba.jpg",
+  "images/ronaldo.jpg",
+  "images/salah.jpg",
+  "images/son.jpg",
+  "images/suarez.jpg"
 ];
 
 class App extends Component {
