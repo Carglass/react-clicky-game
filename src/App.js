@@ -24,11 +24,13 @@ class App extends Component {
       score: 0,
       highscore: 0,
       currentLayout: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      clickedImages: []
+      clickedImages: [],
+      gameStatus: "playing"
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.shuffle = this.shuffle.bind(this);
+    this.updateApp = this.updateApp.bind(this);
   }
 
   shuffle(array) {
@@ -46,7 +48,7 @@ class App extends Component {
     return shuffledArray;
   }
 
-  handleClick(clickedValue) {
+  updateApp(clickedValue) {
     // check if the new click is amongst the clicked images
     if (this.state.clickedImages.some(element => element === clickedValue)) {
       // if yes, the game is lost
@@ -60,7 +62,18 @@ class App extends Component {
       // clickedImages is reset to []
       // TODO: currentlayout is modified randomly
       let newLayout = this.shuffle(this.state.currentLayout);
-      this.setState({ score: 0, clickedImages: [], currentLayout: newLayout });
+      this.setState({
+        clickedImages: [],
+        currentLayout: newLayout,
+        gameStatus: "lost"
+      });
+    } else if (this.state.score === 11) {
+      this.setState({
+        score: 12,
+        highscore: 12,
+        clickedImages: [],
+        gameStatus: "won"
+      });
     } else {
       // if no, the game goes on
       // the score is incremented by one
@@ -75,11 +88,32 @@ class App extends Component {
     }
   }
 
+  handleClick(clickedValue) {
+    if (this.state.gameStatus !== "playing") {
+      this.setState(
+        { score: 0, gameStatus: "playing" },
+        // has to put it in the callback to be sure the setState are done AFTER this one
+        this.updateApp.bind(this, this.clickedValue)
+      );
+    } else {
+      this.updateApp(clickedValue);
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <header>
           <div className="page-title">World Cup Clicky Game</div>
+          <div className="final-results">
+            {this.state.gameStatus === "lost"
+              ? `You lost :(, and you scored ${
+                  this.state.score
+                } points, click on any image to try again!`
+              : this.state.gameStatus === "won"
+                ? `You won!!! Congrats, you can click on any image to try again`
+                : ""}
+          </div>
           <div className="scores">
             <div className="current-score">Score: {this.state.score}</div>
             <div className="current-score">
